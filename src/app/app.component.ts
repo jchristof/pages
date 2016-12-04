@@ -34,6 +34,10 @@ export class AppComponent implements OnInit{
     // move the sphere upward 1/2 of its height
     sphere.position.y = 1;
 
+    const material = new BABYLON.StandardMaterial("texture1", scene);
+    sphere.material = material;
+    sphere.material.alpha = 0.5;
+    material.diffuseTexture = new BABYLON.Texture("./assets/grass.png", scene);
     // create a built-in "ground" shape; its constructor takes the same 5 params as the sphere's one
     var ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene);
 
