@@ -9,8 +9,8 @@ import { OnInit } from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'app works!';
 
-  ngOnInit(): void {
-    var canvas = document.getElementById('renderCanvas');
+  ngOnInit(): void { 
+    var canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
     var engine = new BABYLON.Engine(canvas, true);
 
         // create a basic BJS Scene object
