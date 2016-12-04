@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +11,5 @@ import { RouterModule, Routes } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-
+  title = 'jchristof';
 }
