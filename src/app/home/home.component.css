@@ -1,0 +1,29 @@
+h1 {
+    font-size: 5em;
+    font-family: Orbitron;
+    color: grey;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 100;
+    font-family: Open Sans Condensed;
+    color: #ccc;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
+}
+
+.links {
+  text-align: center;
+}
+
+a {
+    font-family: Open Sans Condensed;
+    font-size: 2em;
+    color: #ccc;
+    text-decoration: none;
+}
