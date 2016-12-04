@@ -6,6 +6,16 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BabylonComponent } from './babylon/babylon.component';
+import { RouterModule }   from '@angular/router';
+import { AppRoutingModule }     from './app-routing.module';
+
+RouterModule.forRoot([
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+])
 
 @NgModule({
   declarations: [
@@ -14,9 +24,11 @@ import { BabylonComponent } from './babylon/babylon.component';
     BabylonComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
