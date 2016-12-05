@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   template: `
    <h1>{{title}}</h1>
    <a routerLink="/home">Home</a>
+   <a routerLink="/gba">Game Boy Advance</a>
+   <a routerLink="/audio">Audio</a>
    <a routerLink="/babylon">Babylon</a>
    <router-outlet></router-outlet>
  `,

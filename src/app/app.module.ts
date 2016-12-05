@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { BabylonComponent } from './babylon/babylon.component';
 import { RouterModule }   from '@angular/router';
 import { AppRoutingModule }     from './app-routing.module';
+import { GbaComponent } from './gba/gba.component';
+import { AudioComponent } from './audio/audio.component';
 
 RouterModule.forRoot([
   {
@@ -21,7 +23,9 @@ RouterModule.forRoot([
   declarations: [
     AppComponent,
     HomeComponent,
-    BabylonComponent
+    BabylonComponent,
+    GbaComponent,
+    AudioComponent
   ],
   imports: [
     AppRoutingModule,
