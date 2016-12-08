@@ -10,6 +10,8 @@ import { RouterModule }   from '@angular/router';
 import { AppRoutingModule }     from './app-routing.module';
 import { GbaComponent } from './gba/gba.component';
 import { AudioComponent } from './audio/audio.component';
+import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimitive.component';
+import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
 
 RouterModule.forRoot([
   {
@@ -25,7 +27,9 @@ RouterModule.forRoot([
     HomeComponent,
     BabylonComponent,
     GbaComponent,
-    AudioComponent
+    AudioComponent,
+    NewprimitiveComponent,
+    NewSphereComponent,
   ],
   imports: [
     AppRoutingModule,
