@@ -47,7 +47,10 @@ export class BabylonComponent implements OnInit {
 
     engine.runRenderLoop(() => {
       this.scene.render();
-  });
+    });
+    window.addEventListener("resize", function () {
+      engine.resize();
+    });
   }
 
 }
