@@ -12,7 +12,7 @@ import { GbaComponent } from './gba/gba.component';
 import { AudioComponent } from './audio/audio.component';
 import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimitive.component';
 import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
-
+import { SceneService } from './babylon/scene.service'
 RouterModule.forRoot([
   {
     path: '',
@@ -38,7 +38,9 @@ RouterModule.forRoot([
     HttpModule,
     RouterModule
   ],
-  providers: [],
+  providers: [
+    SceneService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
