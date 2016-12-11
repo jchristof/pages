@@ -1,6 +1,7 @@
 <div>
     <label>diameter: </label>
-    <input value="{{diameter}}" placeholder="10">
+    <input [(ngModel)]="diameter" placeholder="10">
     <label>segments: </label>
-    <input value="{{segments}}" placeholder="10">
-  </div>
+    <input [(ngModel)]="segments" placeholder="10">
+    <button (click)="add()" >Add</button>
+</div>

@@ -1,18 +1,19 @@
 
-  <select [(ngModel)]="selectedPrimitive">
-    <option *ngFor="let primitive of primitives" [ngSwitch]="primitive">{{primitive}}</option>
-  </select>
-  <button (click)="add()" >Add</button>
+<select [(ngModel)]="selectedPrimitive">
+  <option *ngFor="let primitive of primitives" [ngSwitch]="primitive">{{primitive}}</option>
+</select>
+<input [(ngModel)]="name" >
 <div>
   <label>position: </label>
   <label>x: </label>
-  <input value="{{x}}" placeholder="0">
+  <input [(ngModel)]="position.x"  placeholder="0">
   <label>y: </label>
-  <input value="{{y}}" placeholder="0">
+  <input [(ngModel)]="position.y"  placeholder="0">
   <label>z: </label>
-  <input value="{{y}}" placeholder="0">
+  <input [(ngModel)]="position.z"  placeholder="0">
 </div>
-  <span [ngSwitch]="selectedPrimitive">
-    <app-new-sphere *ngSwitchCase="'sphere'"></app-new-sphere>
-  </span>
+<span [ngSwitch]="selectedPrimitive">
+  <app-new-sphere *ngSwitchCase="'sphere'" [position]="position" [name]="name"></app-new-sphere>
+  <app-new-box *ngSwitchCase="'box'" [position]="position" [name]="name"></app-new-box>
+</span>
 

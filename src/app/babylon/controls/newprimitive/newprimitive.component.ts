@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SceneService } from '../../scene.service'
+
 @Component({
   selector: 'app-newprimitive',
   templateUrl: './newprimitive.component.html',
@@ -7,15 +7,17 @@ import { SceneService } from '../../scene.service'
 })
 export class NewprimitiveComponent implements OnInit {
 
-  constructor(private sceneService:SceneService) { }
+  constructor() { }
 
   primitives:string[] = ['box', 'sphere', 'plane', 'cylinder'];
   selectedPrimitive:string;
 
+  name:string;
+  position:BABYLON.Vector3;
+
   ngOnInit() {
+    this.selectedPrimitive = 'sphere';
+    this.position = new BABYLON.Vector3(0,0,0);
   }
 
-  add(){
-    BABYLON.Mesh.CreateSphere('sphere1', 16, 2, this.sceneService.scene);
-  }
 }

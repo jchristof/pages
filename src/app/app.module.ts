@@ -12,7 +12,8 @@ import { GbaComponent } from './gba/gba.component';
 import { AudioComponent } from './audio/audio.component';
 import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimitive.component';
 import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
-import { SceneService } from './babylon/scene.service'
+import { SceneService } from './babylon/scene.service';
+import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box.component'
 RouterModule.forRoot([
   {
     path: '',
@@ -30,6 +31,7 @@ RouterModule.forRoot([
     AudioComponent,
     NewprimitiveComponent,
     NewSphereComponent,
+    NewBoxComponent,
   ],
   imports: [
     AppRoutingModule,
