@@ -13,7 +13,8 @@ import { AudioComponent } from './audio/audio.component';
 import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimitive.component';
 import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
 import { SceneService } from './babylon/scene.service';
-import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box.component'
+import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box.component';
+import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/scene-editor.component'
 RouterModule.forRoot([
   {
     path: '',
@@ -32,6 +33,7 @@ RouterModule.forRoot([
     NewprimitiveComponent,
     NewSphereComponent,
     NewBoxComponent,
+    SceneEditorComponent,
   ],
   imports: [
     AppRoutingModule,

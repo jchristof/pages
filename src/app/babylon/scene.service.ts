@@ -10,5 +10,12 @@ export class SceneService {
 
     set scene(scene:BABYLON.Scene){
         this._scene = scene;
+        this._scene.onNewMeshAddedObservable.add((eventData: BABYLON.AbstractMesh, eventState: any) => {
+            console.log("X");
+        });
+
+        this._scene.beforeRender = ()=>{
+
+        }
     }
 }
