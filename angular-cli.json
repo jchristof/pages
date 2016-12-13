@@ -21,8 +21,8 @@
         "styles.css"
       ],
       "scripts": [
-        "lib/babylon/babylon.js",
-        "lib/colorpicker/jscolor.min.js"
+        "src/lib/babylon/babylon.js",
+        "src/lib/colorpicker/jscolor.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
