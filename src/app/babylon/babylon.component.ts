@@ -48,6 +48,14 @@ export class BabylonComponent implements OnInit {
     engine.runRenderLoop(() => {
       this.scene.render();
     });
+
+   window.addEventListener("click", () => {
+   // We try to pick an object
+      var pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY);
+      if(pickResult.hit)
+        this.sceneSerice.pickResult = pickResult;
+    }),
+    
     window.addEventListener("resize", function () {
       engine.resize();
     });

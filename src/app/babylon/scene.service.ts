@@ -22,4 +22,20 @@ export class SceneService {
             })
         });
     }
+
+    private pickingInfo:BABYLON.PickingInfo;
+    set pickResult(pickResult:BABYLON.PickingInfo){
+        this.unselectPreviousPick();
+
+        this.pickingInfo = pickResult;
+        this.pickingInfo.pickedMesh.material.wireframe = true;
+        this.pickingInfo.pickedMesh.material.alpha = .5;
+    }
+
+    unselectPreviousPick(){
+        if(this.pickingInfo){
+            this.pickingInfo.pickedMesh.material.wireframe = false;
+            this.pickingInfo.pickedMesh.material.alpha = 1;
+        }
+    }
 }
