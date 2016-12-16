@@ -1,5 +1,12 @@
 
   <canvas id="renderCanvas"></canvas>
-  <app-newprimitive></app-newprimitive>
-  <app-scene-editor></app-scene-editor>
+    <tabs>
+      <tab [tabTitle]="'Add'">
+        <app-newprimitive></app-newprimitive>
+      </tab>
+      <tab tabTitle="Mod">Modify Selection</tab>
+      <tab tabTitle="Scene">
+        <app-scene-editor></app-scene-editor>
+      </tab>
+    </tabs>
 

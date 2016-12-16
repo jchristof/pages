@@ -27,15 +27,24 @@ export class SceneService {
     set pickResult(pickResult:BABYLON.PickingInfo){
         this.unselectPreviousPick();
 
+        pickResult.pickedMesh.material = new BABYLON.StandardMaterial("material", this.scene);
         this.pickingInfo = pickResult;
         this.pickingInfo.pickedMesh.material.wireframe = true;
         this.pickingInfo.pickedMesh.material.alpha = .5;
     }
 
-    unselectPreviousPick(){
+    unselectPreviousPick():void{
         if(this.pickingInfo){
             this.pickingInfo.pickedMesh.material.wireframe = false;
             this.pickingInfo.pickedMesh.material.alpha = 1;
         }
+    }
+
+    clearScene():void{
+        this.pickingInfo = null;
+        this.scene.meshes.forEach((mesh)=>{
+            mesh.dispose();
+        });
+        
     }
 }

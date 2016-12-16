@@ -14,7 +14,9 @@ import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimit
 import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
 import { SceneService } from './babylon/scene.service';
 import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box.component';
-import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/scene-editor.component'
+import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/scene-editor.component';
+import { Tabs } from './uicomponents/tabs/tabs.component';
+import { Tab } from './uicomponents/tabs/tab.component';
 RouterModule.forRoot([
   {
     path: '',
@@ -34,13 +36,15 @@ RouterModule.forRoot([
     NewSphereComponent,
     NewBoxComponent,
     SceneEditorComponent,
+    Tab, Tabs
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule
+    RouterModule,
+    
   ],
   providers: [
     SceneService

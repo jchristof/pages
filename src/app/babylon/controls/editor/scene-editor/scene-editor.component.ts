@@ -29,6 +29,9 @@ export class SceneEditorComponent implements OnInit {
     console.log(value);
   }
 
+  clear(){
+    this.sceneService.clearScene();
+  }
   ngOnInit() {
     this.meshes = this.sceneService.scene.meshes;
   }

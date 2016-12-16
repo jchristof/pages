@@ -1,7 +1,5 @@
-<div>
-  <label>Scene</label>
-</div>
 Color: <input  #jscolor class="jscolor" (change)="update(this)" value="AB2567">
 <select [(ngModel)]="selectedMesh" (change)="onChange($event.target.value)">
   <option *ngFor="let mesh of meshes" [ngSwitch]="mesh">{{mesh.id}}</option>
 </select> 
+<button (click)="clear()">Clear</button>
