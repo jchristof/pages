@@ -29,6 +29,21 @@ export class SceneEditorComponent implements OnInit {
     console.log(value);
   }
 
+  groundMesh:BABYLON.AbstractMesh;
+  showGroundChange(checked){
+    if(checked){
+      this.groundMesh = BABYLON.Mesh.CreateGround('_scene_editor_ground', 100, 100, 10, this.sceneService.scene);
+      this.groundMesh.material = new BABYLON.StandardMaterial("material", this.sceneService.scene);
+      this.groundMesh.material.wireframe = true;
+      this.groundMesh.material.alpha = .5;
+    }
+    else if(this.groundMesh){
+      this.groundMesh.dispose();
+      this.groundMesh = null;
+    }
+
+  }
+
   clear(){
     this.sceneService.clearScene();
   }

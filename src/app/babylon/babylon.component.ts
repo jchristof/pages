@@ -50,15 +50,16 @@ export class BabylonComponent implements OnInit {
     });
 
    window.addEventListener("click", () => {
-   // We try to pick an object
-      var pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY);
+      const pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY, 
+      (mesh:BABYLON.AbstractMesh)=>{
+          return mesh.id === '_scene_editor_ground' ? false : true;
+      });
       if(pickResult.hit)
         this.sceneSerice.pickResult = pickResult;
     }),
     
-    window.addEventListener("resize", function () {
+    window.addEventListener("resize", () => {
       engine.resize();
     });
   }
-
 }

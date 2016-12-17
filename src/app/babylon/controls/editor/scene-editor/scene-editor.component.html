@@ -1,5 +1,16 @@
-Color: <input  #jscolor class="jscolor" (change)="update(this)" value="AB2567">
-<select [(ngModel)]="selectedMesh" (change)="onChange($event.target.value)">
-  <option *ngFor="let mesh of meshes" [ngSwitch]="mesh">{{mesh.id}}</option>
-</select> 
+<div>
+  <div>
+    Meshes:
+    <select [(ngModel)]="selectedMesh" (change)="onChange($event.target.value)">
+      <option *ngFor="let mesh of meshes" [ngSwitch]="mesh">{{mesh.id}}</option>
+    </select> 
+  </div>
+  <div>
+    Show Ground <input type="checkbox"[checked]="showGround" (change)="showGroundChange($event.target.checked)">
+  </div>
+  <div>
+    Color: <input  #jscolor class="jscolor" (change)="update(this)" value="AB2567">
+  </div>
 <button (click)="clear()">Clear</button>
+
+</div>

@@ -24,6 +24,10 @@ export class SceneService {
     }
 
     private pickingInfo:BABYLON.PickingInfo;
+    get pickedMesh():BABYLON.AbstractMesh{
+        return this.pickingInfo ? this.pickingInfo.pickedMesh : null;
+    }
+    
     set pickResult(pickResult:BABYLON.PickingInfo){
         this.unselectPreviousPick();
 

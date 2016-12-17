@@ -17,6 +17,7 @@ import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box
 import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/scene-editor.component';
 import { Tabs } from './uicomponents/tabs/tabs.component';
 import { Tab } from './uicomponents/tabs/tab.component';
+import { ModifyMeshComponent } from './babylon/controls/editor/modify-mesh/modify-mesh/modify-mesh.component';
 RouterModule.forRoot([
   {
     path: '',
@@ -36,7 +37,7 @@ RouterModule.forRoot([
     NewSphereComponent,
     NewBoxComponent,
     SceneEditorComponent,
-    Tab, Tabs
+    Tab, Tabs, ModifyMeshComponent
   ],
   imports: [
     AppRoutingModule,
