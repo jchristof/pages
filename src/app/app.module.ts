@@ -18,6 +18,8 @@ import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/sce
 import { Tabs } from './uicomponents/tabs/tabs.component';
 import { Tab } from './uicomponents/tabs/tab.component';
 import { ModifyMeshComponent } from './babylon/controls/editor/modify-mesh/modify-mesh/modify-mesh.component';
+import { EditCameraComponent } from './babylon/controls/editor/camera/edit-camera/edit-camera.component';
+import { EditMaterialComponent } from './babylon/controls/editor/material/edit-material/edit-material.component';
 RouterModule.forRoot([
   {
     path: '',
@@ -37,7 +39,7 @@ RouterModule.forRoot([
     NewSphereComponent,
     NewBoxComponent,
     SceneEditorComponent,
-    Tab, Tabs, ModifyMeshComponent
+    Tab, Tabs, ModifyMeshComponent, EditCameraComponent, EditMaterialComponent
   ],
   imports: [
     AppRoutingModule,

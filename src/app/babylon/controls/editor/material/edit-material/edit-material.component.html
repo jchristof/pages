@@ -1,0 +1,16 @@
+
+<div style="width: 50%; float:left">
+   <input type="range" max="1000" (change)="changeAlpha($event.target.value)"/>
+  <div>
+    diffuse: <input #diffusecolor class="jscolor" (change)="diffuseChange()" value="AB2567">
+    emissive: <input #emissivecolor class="jscolor" (change)="emissiveChange()" value="AB2567">
+    ambient: <input #ambientcolor class="jscolor" (change)="ambientChange()" value="AB2567">
+    specular: <input #specularcolor class="jscolor" (change)="specularChange()" value="AB2567">
+  </div>
+</div>
+
+<div style="width: 50%; float:right">
+    <canvas id="materialrenderCanvas"></canvas>
+</div>
+
+

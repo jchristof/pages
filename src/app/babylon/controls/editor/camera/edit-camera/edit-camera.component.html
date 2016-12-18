@@ -1,0 +1,5 @@
+    <select name="Cameras" [(ngModel)]="camera">
+        <option *ngFor="let camera of cameras" [value]="camera">  
+        {{camera}}
+        </option>
+    </select>

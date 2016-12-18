@@ -21,8 +21,8 @@ export class BabylonComponent implements OnInit {
     this.sceneSerice.scene = this.scene;
 
     // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
-    var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), this.scene);
-
+    var camera = new BABYLON.UniversalCamera('camera1', new BABYLON.Vector3(0, 5,-10), this.scene);
+    
     // target the camera to scene origin
     camera.setTarget(BABYLON.Vector3.Zero());
 
