@@ -9,7 +9,7 @@ export class NewprimitiveComponent implements OnInit {
 
   constructor() { }
 
-  primitives:string[] = ['box', 'sphere', 'plane', 'cylinder'];
+  primitives:string[] = ['camera', 'light', 'mesh', 'box', 'sphere', 'plane', 'cylinder'];
   selectedPrimitive:string;
 
   name:string;

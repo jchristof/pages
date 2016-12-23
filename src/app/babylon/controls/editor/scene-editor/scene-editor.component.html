@@ -1,8 +1,14 @@
 <div>
   <div>
-    Meshes:
+    Meshes
     <select [(ngModel)]="selectedMesh" (change)="onChange($event.target.value)">
       <option *ngFor="let mesh of meshes" [ngSwitch]="mesh">{{mesh.id}}</option>
+    </select> 
+  </div>
+  <div>
+    Materials
+    <select [(ngModel)]="selectedMaterial" (change)="onChange($event.target.value)">
+      <option *ngFor="let material of materials" [ngSwitch]="material">{{material.id}}</option>
     </select> 
   </div>
   <div>

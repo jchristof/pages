@@ -18,7 +18,6 @@
 }
 
 .inputfile + label img {
-
     width:32px;
     height:32px
 }
@@ -29,15 +28,13 @@
 }
 
 .inputfile + label span img {
-
     width:50%;
     height:50%
 }
 
 .inputfile:hover + label span { 
 	visibility:visible;
-    position:fixed;
-
+    position:absolute;
 }
 
 .jscolor {

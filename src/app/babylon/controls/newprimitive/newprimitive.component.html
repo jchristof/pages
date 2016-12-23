@@ -24,5 +24,6 @@
 <span [ngSwitch]="selectedPrimitive">
   <app-new-sphere *ngSwitchCase="'sphere'" [position]="position" [name]="name"></app-new-sphere>
   <app-new-box *ngSwitchCase="'box'" [position]="position" [name]="name"></app-new-box>
+  <load-mesh *ngSwitchCase="'mesh'" [position]="position" [name]="name"></load-mesh>
 </span>
 

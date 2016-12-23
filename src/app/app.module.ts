@@ -21,6 +21,7 @@ import { ModifyMeshComponent } from './babylon/controls/editor/modify-mesh/modif
 import { EditCameraComponent } from './babylon/controls/editor/camera/edit-camera/edit-camera.component';
 import { EditMaterialComponent } from './babylon/controls/editor/material/edit-material/edit-material.component';
 import { AceEditorComponent } from './uicomponents/ace-editor/ace-editor.component';
+import { LoadMeshComponent } from './babylon/controls/newprimitive/load-mesh/load-mesh.component';
 RouterModule.forRoot([
   {
     path: '',
@@ -40,7 +41,7 @@ RouterModule.forRoot([
     NewSphereComponent,
     NewBoxComponent,
     SceneEditorComponent,
-    Tab, Tabs, ModifyMeshComponent, EditCameraComponent, EditMaterialComponent, AceEditorComponent
+    Tab, Tabs, ModifyMeshComponent, EditCameraComponent, EditMaterialComponent, AceEditorComponent, LoadMeshComponent
   ],
   imports: [
     AppRoutingModule,
