@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var ace;
 @Component({
   selector: 'ace-editor',
   templateUrl: './ace-editor.component.html',
   styleUrls: ['./ace-editor.component.css']
 })
-//declare var ace;
+
 export class AceEditorComponent implements OnInit {
 
 constructor() { }
