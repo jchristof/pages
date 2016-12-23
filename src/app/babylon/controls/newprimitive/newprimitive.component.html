@@ -1,16 +1,25 @@
-
-<select [(ngModel)]="selectedPrimitive">
-  <option *ngFor="let primitive of primitives" [ngSwitch]="primitive">{{primitive}}</option>
-</select>
-<input [(ngModel)]="name" >
 <div>
-  <label>position: </label>
-  <label>x: </label>
-  <input [(ngModel)]="position.x"  placeholder="0">
-  <label>y: </label>
-  <input [(ngModel)]="position.y"  placeholder="0">
-  <label>z: </label>
-  <input [(ngModel)]="position.z"  placeholder="0">
+  <select [(ngModel)]="selectedPrimitive">
+    <option *ngFor="let primitive of primitives" [ngSwitch]="primitive">{{primitive}}</option>
+  </select>
+</div>
+<div>
+  <label>name</label>
+  <div>
+    <input [(ngModel)]="name" >
+  </div>
+</div>
+<div>
+  <label>position </label>
+  <div>
+      x <input [(ngModel)]="position.x">
+  </div>
+  <div>
+      y <input [(ngModel)]="position.y">
+  </div> 
+  <div>
+      z <input [(ngModel)]="position.z">
+  </div>
 </div>
 <span [ngSwitch]="selectedPrimitive">
   <app-new-sphere *ngSwitchCase="'sphere'" [position]="position" [name]="name"></app-new-sphere>
