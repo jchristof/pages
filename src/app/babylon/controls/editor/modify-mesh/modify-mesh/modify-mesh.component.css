@@ -1,0 +1,9 @@
+.property-name {
+        float:left
+    }
+.property-value {
+    float:right
+}
+input{
+    width:100px
+}
