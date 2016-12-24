@@ -18,8 +18,23 @@ export class LoadMeshComponent extends NewPrimitive implements OnInit {
   ngOnInit() {
   }
 
-  fileChanged(files:FileList){
+  static fileListToArray(files:FileList):Array<File>{
+    const fileArray = new Array<File>();
+
+    if(files == null || files.length === 0)
+      return fileArray;
+   
+    for(let i=0; i<files.length; i++){
+        fileArray.push(files.item(i));
+    }
+
+    return fileArray;
+  }
+
+  fileChanged(fileList:FileList){
+    const files = LoadMeshComponent.fileListToArray(fileList);
     const reader = new FileReader();
+    
     BABYLON.Tools.LoadImage = (url: any, onload: any, onerror: any, database: any):HTMLImageElement=>{
       const imageReader = new FileReader();
       const img = new Image();
@@ -30,14 +45,9 @@ export class LoadMeshComponent extends NewPrimitive implements OnInit {
         };
         img.src = evt.target.result;
       }
-
-      for(let i=0; i<files.length; i++){
-        let file = files.item(i);
-        if(file.name === url){
-          imageReader.readAsDataURL(file);
-          break;
-        }
-      }
+      
+      const imageFile = files.find(x=>x.name === url);
+      imageReader.readAsDataURL(imageFile);
       
       return img;
     }
@@ -45,12 +55,10 @@ export class LoadMeshComponent extends NewPrimitive implements OnInit {
         const babylonFile = evt.target.result;
         BABYLON.SceneLoader.ImportMesh("", "", 'data:' + babylonFile, this.sceneService.scene);
     }
-    for(let i=0; i<files.length; i++){
-      let file = files.item(i);
-      if(file.name.indexOf('.babylon') !== -1){
-        reader.readAsText(file);
-        break;
-      }
-    }
+
+    files.filter((file:File, index:number, array:File[]):void=>{
+        if(file.name.indexOf('.babylon') !== -1)
+          reader.readAsText(file);
+    });
   }
 }
