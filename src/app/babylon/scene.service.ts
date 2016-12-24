@@ -31,17 +31,19 @@ export class SceneService {
     set pickResult(pickResult:BABYLON.PickingInfo){
         this.unselectPreviousPick();
 
-        pickResult.pickedMesh.material = new BABYLON.StandardMaterial("material", this.scene);
         this.pickingInfo = pickResult;
-        this.pickingInfo.pickedMesh.material.wireframe = true;
-        this.pickingInfo.pickedMesh.material.alpha = .5;
+        this.pickingInfo.pickedMesh.enableEdgesRendering();    
+        this.pickingInfo.pickedMesh.edgesWidth = 4.0;
+        this.pickingInfo.pickedMesh.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
     }
 
     unselectPreviousPick():void{
-        if(this.pickingInfo){
-            this.pickingInfo.pickedMesh.material.wireframe = false;
-            this.pickingInfo.pickedMesh.material.alpha = 1;
-        }
+        if(!this.pickingInfo)
+            return;
+
+        this.pickingInfo.pickedMesh.disableEdgesRendering();    
+        this.pickingInfo.pickedMesh.edgesColor = null;
+        
     }
 
     clearScene():void{
