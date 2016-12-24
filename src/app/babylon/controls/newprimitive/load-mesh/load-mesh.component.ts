@@ -31,23 +31,27 @@ export class LoadMeshComponent extends NewPrimitive implements OnInit {
     return fileArray;
   }
 
-  fileChanged(fileList:FileList){
-    const files = LoadMeshComponent.fileListToArray(fileList);
+  fileChanged(target:HTMLInputElement){
+    const files = LoadMeshComponent.fileListToArray(target.files);
+    target.type = '';
+    target.type = 'file';
+
     const reader = new FileReader();
     
     BABYLON.Tools.LoadImage = (url: any, onload: any, onerror: any, database: any):HTMLImageElement=>{
-      const imageReader = new FileReader();
       const img = new Image();
 
-      imageReader.onload = (evt: any)=>{
-        img.onload = () => {
-          onload(img);
-        };
-        img.src = evt.target.result;
+      img.onload = () => {
+        onload(img);
+        window.URL.revokeObjectURL(img.src);
+      };
+
+      img.onerror = () => {
+        window.URL.revokeObjectURL(img.src);
       }
-      
+        
       const imageFile = files.find(x=>x.name === url);
-      imageReader.readAsDataURL(imageFile);
+      img.src = window.URL.createObjectURL(imageFile);
       
       return img;
     }
