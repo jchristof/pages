@@ -18,5 +18,10 @@
     Color: <input  #jscolor class="jscolor" (change)="update(this)" value="AB2567">
   </div>
 <button (click)="clear()">Clear</button>
-
+<input type="file" name="file" id="file" class="inputfile" (change)="fileChanged($event.target)" multiple/>
+<ul class="list-group">
+      <li *ngFor="let file of fileSystem.files" class="list-group-item">
+        {{ file.name }}
+      </li>
+    </ul>
 </div>

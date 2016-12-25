@@ -44,7 +44,11 @@ export class EditMaterialComponent implements OnInit {
 
     newMaterial.alpha = this.material.alpha;
     newMaterial.diffuseColor = this.material.diffuseColor;
-    newMaterial.diffuseTexture = new BABYLON.Texture("data:" + UUID.generate(), editorScene, false, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE, null, null, this.diffuseTextureImage, true);
+    newMaterial.emissiveColor = this.material.emissiveColor;
+    newMaterial.ambientColor = this.material.ambientColor;
+    newMaterial.specularColor = this.material.specularColor;
+    
+    //newMaterial.diffuseTexture = new BABYLON.Texture("data:" + UUID.generate(), editorScene, false, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE, null, null, this.diffuseTextureImage, true);
     this.sceneService.pickedMesh.material = newMaterial;
   }
 

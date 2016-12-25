@@ -1,1 +1,6 @@
-<input type="file" name="file" id="file" class="inputfile" (change)="fileChanged($event.target)" multiple/>
+<div  class="list-group">
+    <a href="javascript:;" *ngFor="let file of fileSystem.files | filter:'babylon'" class="list-group-item" (click)="meshItemSelected(file.name)">
+    {{ file.name }}
+    </a>
+</div >
+

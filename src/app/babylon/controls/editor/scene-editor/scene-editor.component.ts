@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SceneService } from '../../../scene.service'
+import { FileSystem } from '../../../../../services/FileSystem'
 
 @Component({
   selector: 'app-scene-editor',
@@ -10,7 +11,7 @@ import { SceneService } from '../../../scene.service'
 export class SceneEditorComponent implements OnInit {
   @ViewChild('jscolor') input;
 
-  constructor(private sceneService:SceneService) {    
+  constructor(private sceneService:SceneService, public fileSystem:FileSystem) {    
     //this.sceneService.sceneChangedSubscribers.push(()=>{});
   }
 
@@ -37,6 +38,11 @@ export class SceneEditorComponent implements OnInit {
     console.log(value);
   }
 
+  fileChanged(target:HTMLInputElement){
+      this.fileSystem.addFiles(target.files);
+      target.type = '';
+      target.type = 'file';
+  }
 //https://makina-corpus.com/blog/metier/2014/how-to-use-multimaterials-with-a-tiled-ground-in-babylonjs
   groundMesh:BABYLON.AbstractMesh;
   showGroundChange(checked):void{

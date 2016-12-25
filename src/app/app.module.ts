@@ -13,6 +13,7 @@ import { AudioComponent } from './audio/audio.component';
 import { NewprimitiveComponent } from './babylon/controls/newprimitive/newprimitive.component';
 import { NewSphereComponent } from './babylon/controls/newprimitive/new-sphere/new-sphere.component';
 import { SceneService } from './babylon/scene.service';
+import { FileSystem } from '../services/FileSystem';
 import { NewBoxComponent } from './babylon/controls/newprimitive/new-box/new-box.component';
 import { SceneEditorComponent } from './babylon/controls/editor/scene-editor/scene-editor.component';
 import { Tabs } from './uicomponents/tabs/tabs.component';
@@ -22,6 +23,7 @@ import { EditCameraComponent } from './babylon/controls/editor/camera/edit-camer
 import { EditMaterialComponent } from './babylon/controls/editor/material/edit-material/edit-material.component';
 import { AceEditorComponent } from './uicomponents/ace-editor/ace-editor.component';
 import { LoadMeshComponent } from './babylon/controls/newprimitive/load-mesh/load-mesh.component';
+import { FilterFileTypePipe } from '../pipes/FilterFileTypePipe'
 RouterModule.forRoot([
   {
     path: '',
@@ -41,18 +43,25 @@ RouterModule.forRoot([
     NewSphereComponent,
     NewBoxComponent,
     SceneEditorComponent,
-    Tab, Tabs, ModifyMeshComponent, EditCameraComponent, EditMaterialComponent, AceEditorComponent, LoadMeshComponent
+    Tab, 
+    Tabs, 
+    ModifyMeshComponent, 
+    EditCameraComponent, 
+    EditMaterialComponent, 
+    AceEditorComponent, 
+    LoadMeshComponent,
+    FilterFileTypePipe
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule,
-    
+    RouterModule,   
   ],
   providers: [
-    SceneService
+    SceneService,
+    FileSystem
   ],
   bootstrap: [AppComponent]
 })
