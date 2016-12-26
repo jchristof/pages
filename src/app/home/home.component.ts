@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnimatedPrimitive } from './AnimatedPrimitive'
 
 @Component({
@@ -6,14 +6,19 @@ import { AnimatedPrimitive } from './AnimatedPrimitive'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   constructor() { }
 
+  private animatedPrimitive:Array<AnimatedPrimitive> = [];
+  private engine:BABYLON.Engine;
+  private scene:BABYLON.Scene;
+  
   ngOnInit() {
     const canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
-    const engine = new BABYLON.Engine(canvas, true);
-    const scene = new BABYLON.Scene(engine);
+    const engine = this.engine = new BABYLON.Engine(canvas, true);
+    const scene = this.scene = new BABYLON.Scene(engine);
+    
     scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
     
     const camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 0,-10), scene);
@@ -45,7 +50,6 @@ export class HomeComponent implements OnInit {
 
     scene.beginAnimation(box, 0, 119, true);
 
-    this.animatedPrimitive = []
     for(let i=0; i<100; i++){
       this.animatedPrimitive.push(new AnimatedPrimitive(engine, scene, camera));
 
@@ -62,5 +66,15 @@ export class HomeComponent implements OnInit {
       engine.resize();
     });
   }
-  animatedPrimitive:Array<AnimatedPrimitive>;
+
+  ngOnDestroy(){
+    this.animatedPrimitive.forEach(animation=>{
+      animation.dispose();
+    })
+    if(this.scene)
+      this.scene.dispose();
+    if(this.engine)
+    this.engine.dispose();
+  }
+  
 }
