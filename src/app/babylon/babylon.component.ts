@@ -1,25 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { SceneService } from './scene.service'
 import { FileSystem } from '../../services/FileSystem'
+import { BabylonEngine } from '../../services/BabylonEngine'
+
 @Component({
   selector: 'app-babylon',
   templateUrl: './babylon.component.html',
   styleUrls: ['./babylon.component.css']
 })
-export class BabylonComponent implements OnInit {
+export class BabylonComponent implements OnInit, OnDestroy  {
 
-  constructor(private sceneSerice:SceneService, private fileSystem:FileSystem) { 
-  }
+  constructor(private babylonEngine:BabylonEngine, private sceneSerice:SceneService, private fileSystem:FileSystem) { }
 
   scene:BABYLON.Scene = null;
 
   ngOnInit(): void { 
     var canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
-    var engine = new BABYLON.Engine(canvas, true);
+    var engine = this.babylonEngine.init(canvas);
 
     // create a basic BJS Scene object
     this.scene = new BABYLON.Scene(engine);
     this.sceneSerice.scene = this.scene;
+
+    this.babylonToolsImageLoader = BABYLON.Tools.LoadImage;
 
     BABYLON.Tools.LoadImage = (url: any, onload: any, onerror: any, database: any):HTMLImageElement => {
       return this.fileSystem.loadImage(url, onload, onerror, database)
@@ -33,8 +36,8 @@ export class BabylonComponent implements OnInit {
 
     var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), this.scene);
 
-    engine.runRenderLoop(() => {
-      this.scene.render();
+    this.babylonEngine.addRenderTask(()=>{
+        this.scene.render();
     });
 
    window.addEventListener("click", () => {
@@ -46,10 +49,14 @@ export class BabylonComponent implements OnInit {
         this.sceneSerice.pickResult = pickResult;
       else
         this.sceneSerice.unselectPreviousPick();
-    }),
-    
-    window.addEventListener("resize", () => {
-      engine.resize();
     });
+  }
+
+  private babylonToolsImageLoader:(url: any, onload: any, onerror: any, database: any)=>HTMLImageElement;
+  ngOnDestroy(){
+    BABYLON.Tools.LoadImage = this.babylonToolsImageLoader;
+    if(this.scene)
+      this.scene.dispose();
+    this.babylonEngine.dispose();
   }
 }

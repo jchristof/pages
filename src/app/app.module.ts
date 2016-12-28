@@ -24,7 +24,8 @@ import { EditMaterialComponent } from './babylon/controls/editor/material/edit-m
 import { AceEditorComponent } from './uicomponents/ace-editor/ace-editor.component';
 import { LoadMeshComponent } from './babylon/controls/newprimitive/load-mesh/load-mesh.component';
 import { FilterFileTypePipe } from '../pipes/FilterFileTypePipe';
-import { ToadattackComponent } from './toadattack/toadattack.component'
+import { ToadattackComponent } from './toadattack/toadattack.component';
+import { BabylonEngine } from '../services/BabylonEngine';
 RouterModule.forRoot([
   {
     path: '',
@@ -63,7 +64,8 @@ RouterModule.forRoot([
   ],
   providers: [
     SceneService,
-    FileSystem
+    FileSystem,
+    BabylonEngine
   ],
   bootstrap: [AppComponent]
 })

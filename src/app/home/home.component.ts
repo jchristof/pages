@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnimatedPrimitive } from './AnimatedPrimitive'
+import { BabylonEngine } from '../../services/BabylonEngine'
 
 @Component({
   selector: 'app-home',
@@ -8,15 +9,15 @@ import { AnimatedPrimitive } from './AnimatedPrimitive'
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private babylonEngine:BabylonEngine) { }
 
   private animatedPrimitive:Array<AnimatedPrimitive> = [];
-  private engine:BABYLON.Engine;
+
   private scene:BABYLON.Scene;
   
   ngOnInit() {
     const canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
-    const engine = this.engine = new BABYLON.Engine(canvas, true);
+    const engine = this.babylonEngine.init(canvas);
     const scene = this.scene = new BABYLON.Scene(engine);
     
     scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
@@ -57,13 +58,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.animatedPrimitive[i].start();
       },1000 * Math.random());
     }
-    engine.runRenderLoop(() => {
-      scene.render();
-      
-    });
-
-    window.addEventListener("resize", function () {
-      engine.resize();
+    this.babylonEngine.addRenderTask(()=>{
+        this.scene.render();
     });
   }
 
@@ -73,8 +69,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
     if(this.scene)
       this.scene.dispose();
-    if(this.engine)
-    this.engine.dispose();
+    this.babylonEngine.dispose();
   }
   
 }
