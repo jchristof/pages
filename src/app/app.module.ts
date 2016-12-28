@@ -23,7 +23,8 @@ import { EditCameraComponent } from './babylon/controls/editor/camera/edit-camer
 import { EditMaterialComponent } from './babylon/controls/editor/material/edit-material/edit-material.component';
 import { AceEditorComponent } from './uicomponents/ace-editor/ace-editor.component';
 import { LoadMeshComponent } from './babylon/controls/newprimitive/load-mesh/load-mesh.component';
-import { FilterFileTypePipe } from '../pipes/FilterFileTypePipe'
+import { FilterFileTypePipe } from '../pipes/FilterFileTypePipe';
+import { ToadattackComponent } from './toadattack/toadattack.component'
 RouterModule.forRoot([
   {
     path: '',
@@ -50,7 +51,8 @@ RouterModule.forRoot([
     EditMaterialComponent, 
     AceEditorComponent, 
     LoadMeshComponent,
-    FilterFileTypePipe
+    FilterFileTypePipe,
+    ToadattackComponent
   ],
   imports: [
     AppRoutingModule,

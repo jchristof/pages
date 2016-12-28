@@ -13,7 +13,7 @@ export class EditMaterialComponent implements OnInit {
 
   scene:BABYLON.Scene = null;
   material:BABYLON.StandardMaterial = null;
-  diffuseTexture:string = "./assets/placeholder.png";
+  diffuseTexture:string = "./assets/grass.png";
 
   ngOnInit() {
     const canvas = document.getElementById('materialrenderCanvas') as HTMLCanvasElement;

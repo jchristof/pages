@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     const material = new BABYLON.StandardMaterial("material", scene);
     box.material = material;
-    box.material.alpha = 0.8;
+    
     material.diffuseColor = BABYLON.Color3.FromInts(51, 102, 153);
 
     const animationBox = new BABYLON.Animation("yRotAnimation", "rotation.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
