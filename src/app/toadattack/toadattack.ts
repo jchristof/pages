@@ -2,12 +2,10 @@ import { BabylonEngine } from '../../services/BabylonEngine'
 import { IGame } from '../../models/IGame'
 
 export class ToadAttack implements IGame{
-    scene:BABYLON.Scene = null;
+
     camera:BABYLON.UniversalCamera = null;
     score:number = 0;
-  constructor(private babylonEngine:BabylonEngine, canvas:HTMLCanvasElement)  { 
-
-    this.scene = this.babylonEngine.newScene();
+  constructor(private scene:BABYLON.Scene, canvas:HTMLCanvasElement)  { 
 
     this.camera = new BABYLON.UniversalCamera('camera1', new BABYLON.Vector3(0,4,-10), this.scene);
     this.camera.setTarget(BABYLON.Vector3.Zero());
@@ -61,10 +59,12 @@ export class ToadAttack implements IGame{
 
     this.camera.position.x = this.LANES_POSITIONS[Math.floor(this.LANE_NUMBER/2)];
 
-    BABYLON.SceneLoader.ImportMesh("red_toad", "assets/toadattack/", "toad.babylon", this.scene, (meshes) => {
+    BABYLON.SceneLoader.ImportMesh("", "assets/plane/", "ship.babylon", this.scene, (meshes) => {
         var m = meshes[0];
-        m.isVisible = false;
-        m.scaling = new BABYLON.Vector3(0.5,0.5,0.5);
+        
+        m.isVisible = false; 
+        m.scaling = new BABYLON.Vector3(5,5,5); 
+        m.position.y = 2;
         this.TOAD_MODEL = m;
     });
 
