@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
    <a routerLink="/gba">Game Boy Advance</a>
    <a routerLink="/audio">Audio</a>
    <a routerLink="/babylon">Editor</a>
-   <a routerLink="/toadattack">Playground</a>
+   <a routerLink="/playground">Playground</a>
    <router-outlet></router-outlet>
  `,
   styleUrls: ['./app.component.css']

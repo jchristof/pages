@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BabylonComponent } from './babylon/babylon.component';
@@ -24,8 +23,9 @@ import { EditMaterialComponent } from './babylon/controls/editor/material/edit-m
 import { AceEditorComponent } from './uicomponents/ace-editor/ace-editor.component';
 import { LoadMeshComponent } from './babylon/controls/newprimitive/load-mesh/load-mesh.component';
 import { FilterFileTypePipe } from '../pipes/FilterFileTypePipe';
-import { ToadattackComponent } from './toadattack/toadattack.component';
 import { BabylonEngine } from '../services/BabylonEngine';
+import { PlaygroundComponent } from './playground/playground.component';
+
 RouterModule.forRoot([
   {
     path: '',
@@ -53,7 +53,7 @@ RouterModule.forRoot([
     AceEditorComponent, 
     LoadMeshComponent,
     FilterFileTypePipe,
-    ToadattackComponent
+    PlaygroundComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,5 +1,6 @@
-import { IGame } from '../../models/IGame'
-import { GameState } from '../../models/GameState'
+import { IGame } from '../../../models/IGame'
+import { GameState } from '../../../models/GameState'
+import { Shader1 } from './Shader1'
 
 export class Plane implements IGame {
     constructor(private scene:BABYLON.Scene, private canvas:HTMLCanvasElement) { 
@@ -33,8 +34,22 @@ export class Plane implements IGame {
             })
         });
         (this.gamepads as any)._startMonitoringGamepads();
+        this.boxMaterial = new BABYLON.StandardMaterial("boxMaterial", scene);
+        this.boxMaterial.diffuseColor = BABYLON.Color3.FromInts(51, 102, 153);
+        this.boxMaterial.alpha = .8;
+        this.shaderMaterial = new Shader1(scene);
+
+        let skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
+        var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+        skyboxMaterial.backFaceCulling = false;
+        skyboxMaterial.disableLighting = true;
+        skybox.infiniteDistance = true;
+        skybox.material = this.shaderMaterial.shader;
+        this.skybox = skybox;
     };
 
+    shaderMaterial:Shader1;
+    skybox:BABYLON.Mesh;
     render(){
         switch(this.state){
             case GameState.Init:
@@ -61,6 +76,7 @@ export class Plane implements IGame {
 
     dispose(){
         this.gamepads.dispose();
+        this.shaderMaterial.dispose();
         this.scene.dispose();
     }
 
@@ -173,8 +189,6 @@ export class Plane implements IGame {
         particleSystem.direction1 = new BABYLON.Vector3(-2, -2, -2);
         particleSystem.direction2 = new BABYLON.Vector3(2, 2, 2);
 
-
-
         particleSystem.minAngularSpeed = 0;
         particleSystem.maxAngularSpeed = Math.PI;
         particleSystem.minEmitPower = 1;
@@ -186,6 +200,8 @@ export class Plane implements IGame {
 
         return this.fountain;
     }
+
+    boxMaterial:BABYLON.StandardMaterial;
 
     box() {
         this.scene.meshes.forEach(mesh=>{
@@ -204,6 +220,7 @@ export class Plane implements IGame {
         randomSize = this.randomNumber(minSize, maxSize);
 
         var b = BABYLON.Mesh.CreateBox("bb", randomSize, this.scene);
+        //b.material = this.shaderMaterial.shader;
 
         b.scaling.x = this.randomNumber(0.5, 1.5);
         b.scaling.y = this.randomNumber(4, 8);
@@ -213,6 +230,7 @@ export class Plane implements IGame {
         b.position.y = b.scaling.y/2 ;
         b.position.z = randomZ;
 
+        b.material = this.boxMaterial;
         b.actionManager = new BABYLON.ActionManager(this.scene);
         var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter:this.ship.shipMesh};
        // var sba = new BABYLON.SwitchBooleanAction(trigger, this.ship, "killed");
