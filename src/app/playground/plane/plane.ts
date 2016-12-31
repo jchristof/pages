@@ -272,13 +272,13 @@ class Ship{
     constructor(scene:BABYLON.Scene, camera:BABYLON.Camera, particalSystem:BABYLON.AbstractMesh){
         this.killed = false;
         this.scene = scene;
-        BABYLON.SceneLoader.ImportMesh("", "assets/plane/", "ship.babylon", scene, (meshes) => {
+        BABYLON.SceneLoader.ImportMesh("", "assets/plane/", "ship2.babylon", scene, (meshes) => {
             const m = meshes[0];
             
             m.isVisible = true; 
-            m.scaling = new BABYLON.Vector3(5,5,5); 
+           // m.scaling = new BABYLON.Vector3(5,5,5); 
 
-            m.rotation.y = Math.PI;
+            m.rotation.y = Math.PI/2;
             this.speed = 3;
             this.ready = true;
 
@@ -309,25 +309,25 @@ class Ship{
         if(this.shipMesh.rotation.z === 0)
             return;
 
-        if(Math.abs(this.shipMesh.rotation.z) - .1 < 0){
+        if(Math.abs(this.shipMesh.rotation.z) - .01 < 0){
             this.shipMesh.rotation.z = 0;
             return;
         }
         
         if(this.shipMesh.rotation.z < 0)
-            this.shipMesh.rotation.z += .1;
+            this.shipMesh.rotation.z += .01;
         else
-            this.shipMesh.rotation.z -= .1;
+            this.shipMesh.rotation.z -= .01;
     }
 
     rollLeft(){
         if( this.shipMesh.rotation.z < Math.PI/8)
-            this.shipMesh.rotation.z += .1;
+            this.shipMesh.rotation.z += .01;
     }
 
     rollRight(){
         if( this.shipMesh.rotation.z > -Math.PI/8)
-            this.shipMesh.rotation.z -= .1;
+            this.shipMesh.rotation.z -= .01;
     }
 
     scene:BABYLON.Scene;
