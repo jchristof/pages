@@ -1,5 +1,5 @@
 export class SkyboxShader{
-    constructor(scene:BABYLON.Scene){
+    constructor(scene:BABYLON.Scene, size:BABYLON.ISize){
         BABYLON.Effect.ShadersStore["customVertexShader"]=`
             precision mediump float;
 
@@ -161,15 +161,15 @@ void main()
         },10);
         
         shaderMaterial.setVector2("mouse", new BABYLON.Vector2(100, 100));
-        shaderMaterial.setVector2("resolution", new BABYLON.Vector2(screen.width, screen.height));
+        shaderMaterial.setVector2("resolution", new BABYLON.Vector2(size.width, size.height));
         shaderMaterial.setVector3("cameraPosition", BABYLON.Vector3.Zero());
         shaderMaterial.backFaceCulling = false;
 
         this.shaderMaterial = shaderMaterial;
     }
 
-    resize(){
-        this.shaderMaterial.setVector2("resolution", new BABYLON.Vector2(screen.width, screen.height));
+    resize(size:BABYLON.ISize){
+        this.shaderMaterial.setVector2("resolution", new BABYLON.Vector2(size.width, size.height));
     }
 
     private shaderMaterial:BABYLON.ShaderMaterial;

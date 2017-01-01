@@ -20,7 +20,8 @@ export class Plane implements IGame {
         this.gameController = new GameController(this.ship);
 
         this.keyboardEvents();
-        this.skybox = new SkyBox(scene);
+        
+        this.skybox = new SkyBox(scene, canvas as BABYLON.ISize);
         this.obstructionFactory = new ObstructionFactory(scene, this.camera, this.ship);
     };
 
@@ -60,7 +61,7 @@ export class Plane implements IGame {
                 name: "resize",
                 handler: (event:UIEvent)=>{
                     this.canvas.width;
-                    this.skybox.resize();
+                    this.skybox.resize(this.canvas as BABYLON.ISize);
                 }
             }
             
