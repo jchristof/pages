@@ -48,7 +48,7 @@ export class Plane implements IGame {
 
     private keyboardEvents(){
 
-        BABYLON.Tools.RegisterTopRootEvents([
+        this.events = [
             {
                 name: "keydown",
                 handler: (event:KeyboardEvent)=>{this.onKeyDown(event)}
@@ -65,9 +65,11 @@ export class Plane implements IGame {
                 }
             }
             
-            ]);
+            ]
+            BABYLON.Tools.RegisterTopRootEvents(this.events);
     }
 
+    events:Array<any>
 
     render(){
         switch(this.state){
@@ -96,6 +98,7 @@ export class Plane implements IGame {
         this.gameController.dispose();
         this.skybox.dispose();
         this.scene.dispose();
+        BABYLON.Tools.UnregisterTopRootEvents(this.events);
     }
 
     private obstructionFactory:ObstructionFactory;
