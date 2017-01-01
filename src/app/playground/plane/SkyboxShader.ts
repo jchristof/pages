@@ -1,4 +1,4 @@
-export class Shader1{
+export class SkyboxShader{
     constructor(scene:BABYLON.Scene){
         BABYLON.Effect.ShadersStore["customVertexShader"]=`
             precision mediump float;
@@ -142,17 +142,17 @@ void main()
             },
             {
                 attributes: ["position", "normal", "uv"],
-                uniforms: ["world", "worldView", "worldViewProjection", "view", "projection", "time"]
+                uniforms: ["world", "worldView", "worldViewProjection", "view", "projection", "time", "resolution"]
             });
 
-        var refTexture = new BABYLON.Texture("/CYOS/ref.jpg", scene);
-        refTexture.wrapU = BABYLON.Texture.CLAMP_ADDRESSMODE;
-        refTexture.wrapV = BABYLON.Texture.CLAMP_ADDRESSMODE;
+       // var refTexture = new BABYLON.Texture("/CYOS/ref.jpg", scene);
+       // refTexture.wrapU = BABYLON.Texture.CLAMP_ADDRESSMODE;
+       // refTexture.wrapV = BABYLON.Texture.CLAMP_ADDRESSMODE;
 
-        var mainTexture = new BABYLON.Texture("/CYOS/amiga.jpg", scene);
+        //var mainTexture = new BABYLON.Texture("/CYOS/amiga.jpg", scene);
 
-        shaderMaterial.setTexture("textureSampler", mainTexture);
-        shaderMaterial.setTexture("refSampler", refTexture);
+       // shaderMaterial.setTexture("textureSampler", mainTexture);
+       // shaderMaterial.setTexture("refSampler", refTexture);
         shaderMaterial
         let time = 0
         var timeinterval = setInterval(()=>{
@@ -166,6 +166,10 @@ void main()
         shaderMaterial.backFaceCulling = false;
 
         this.shaderMaterial = shaderMaterial;
+    }
+
+    resize(){
+        this.shaderMaterial.setVector2("resolution", new BABYLON.Vector2(screen.width, screen.height));
     }
 
     private shaderMaterial:BABYLON.ShaderMaterial;
