@@ -21,7 +21,13 @@ export class GameController{
                 ship.moveLeft = false;
                 ship.moveRight = false;
             });
-            xgamePad.onbuttondown((buttonPressed:BABYLON.Xbox360Button)=>{})
+            xgamePad.onbuttondown((buttonPressed:BABYLON.Xbox360Button)=>{
+                switch(buttonPressed){
+                    case BABYLON.Xbox360Button.A:
+                        ship.fireShot();
+                        break;
+                }
+            })
         });
         (this.gamepads as any)._startMonitoringGamepads();
     }

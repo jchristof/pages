@@ -12,7 +12,6 @@ export class SceneEditorComponent implements OnInit {
   @ViewChild('jscolor') input;
 
   constructor(private sceneService:SceneService, public fileSystem:FileSystem) {    
-    //this.sceneService.sceneChangedSubscribers.push(()=>{});
   }
 
   selectedMesh:any;

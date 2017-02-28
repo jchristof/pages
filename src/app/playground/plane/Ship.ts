@@ -1,7 +1,9 @@
+import { ShipMunitions } from './ShipMunitions'
 export class Ship{
     constructor(scene:BABYLON.Scene, camera:BABYLON.Camera, particalSystem:BABYLON.AbstractMesh){
         this.killed = false;
         this.scene = scene;
+        this.shipMunitions = new ShipMunitions(scene, this);
         BABYLON.SceneLoader.ImportMesh("", "assets/plane/", "ship2.babylon", scene, (meshes) => {
             const m = meshes[0];
 
@@ -22,6 +24,11 @@ export class Ship{
         });
     }
     
+    update():void{
+        this.position.z += this.speed;
+        this.shipMunitions.update();
+    }
+
     get position():BABYLON.Vector3{
         return this.shipMesh.position;
     }
@@ -59,7 +66,11 @@ export class Ship{
             this.shipMesh.rotation.z -= .01;
     }
 
+    fireShot():void{
+        this.shipMunitions.fireShot(); 
+    }
 
+    shipMunitions:ShipMunitions;
     scene:BABYLON.Scene;
     rollAnimation:BABYLON.Animation;
     ammo:number = 1000;

@@ -11,6 +11,46 @@ export class Plane implements IGame {
         //scene.debugLayer.show();
         scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
         scene.fogDensity = 0.005;
+        scene.registerBeforeRender(()=>{
+            const shotsCollection = this.ship.shipMunitions.shots;
+            const obstructionCollection = this.obstructionFactory.obstructions
+            for(let i = 0; i < shotsCollection.length; i++){
+                let shot = this.ship.shipMunitions.shots[i];
+                if(shot.position.z > this.ship.position.z + 500){
+                    shot.isVisible = false;
+                    shot.dispose();
+                    shotsCollection.splice(shotsCollection.indexOf(shot), 1);
+                }
+            }
+
+             for(let j = 0; j < obstructionCollection.length; j++){                 
+                let obstruction = this.obstructionFactory.obstructions[j];
+
+                if(obstruction.position.z < this.camera.position.z){
+                    obstruction.isVisible = false;    
+                    obstruction.dispose();
+                    obstructionCollection.splice(obstructionCollection.indexOf(obstruction), 1);
+                }
+             }
+
+            for(let i = 0; i < shotsCollection.length; i++){
+                let shot = this.ship.shipMunitions.shots[i];
+
+                for(let j = 0; j < obstructionCollection.length; j++){                 
+                    let obstruction = this.obstructionFactory.obstructions[j];
+                    
+                    if(shot.intersectsMesh(obstruction, false)){
+                        shotsCollection.splice(shotsCollection.indexOf(shot), 1);
+                        obstructionCollection.splice(obstructionCollection.indexOf(obstruction), 1);
+                        shot.isVisible = false;
+                        shot.dispose();
+                        obstruction.isVisible = false;    
+                        obstruction.dispose();
+                        return;
+                    }
+                }
+            }
+        })
         
         this.state = GameState.Init;
         this.camera = this.createCamera(scene);
@@ -18,12 +58,22 @@ export class Plane implements IGame {
 
         this.ship = new Ship(this.scene, this.camera, ParticleSystem.createParticles(scene));
         this.gameController = new GameController(this.ship);
-
+        
         this.keyboardEvents();
         
         this.skybox = new SkyBox(scene, canvas as BABYLON.ISize);
         this.obstructionFactory = new ObstructionFactory(scene, this.camera, this.ship);
     };
+
+    private obstructionFactory:ObstructionFactory;
+    private skybox:SkyBox;
+    private state:GameState;
+    private xgamePad:BABYLON.Xbox360Pad;
+    private gameController:GameController;
+    private timer:NodeJS.Timer;
+    private fountain:BABYLON.AbstractMesh;
+    private ship:Ship;
+    private camera:BABYLON.Camera;
 
     private createCamera(scene:BABYLON.Scene):BABYLON.Camera{
         const camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 5, -15), scene);
@@ -60,7 +110,6 @@ export class Plane implements IGame {
             {
                 name: "resize",
                 handler: (event:UIEvent)=>{
-                    this.canvas.width;
                     this.skybox.resize(this.canvas as BABYLON.ISize);
                 }
             }
@@ -83,7 +132,7 @@ export class Plane implements IGame {
             case GameState.Update:
                 this.move();                  
                 this.camera.position.z += this.ship.speed;
-                this.ship.position.z += this.ship.speed;
+                this.ship.update();
 
                 break;
             case GameState.End:
@@ -101,23 +150,17 @@ export class Plane implements IGame {
         BABYLON.Tools.UnregisterTopRootEvents(this.events);
     }
 
-    private obstructionFactory:ObstructionFactory;
-    private skybox:SkyBox;
-    private state:GameState;
-    private xgamePad:BABYLON.Xbox360Pad;
-    private gameController:GameController;
-    private timer:NodeJS.Timer;
-    private fountain:BABYLON.AbstractMesh;
-    private ship:Ship;
-    private camera:BABYLON.Camera;
-
     onKeyDown(evt:KeyboardEvent){
         if (evt.keyCode == 37 || evt.keyCode == 65) {
             this.ship.moveLeft = true;
             this.ship.moveRight = false;
-        } else if (evt.keyCode == 39 || evt.keyCode == 68) {
+        }
+        else if (evt.keyCode == 39 || evt.keyCode == 68) {
             this.ship.moveRight = true;
             this.ship.moveLeft = false;
+        }
+        else if(evt.keyCode == 32){
+            this.ship.fireShot();      
         }
     }
 

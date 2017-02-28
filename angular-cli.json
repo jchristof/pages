@@ -22,8 +22,11 @@
       ],
       "scripts": [
         "lib/babylon/babylon.js",
+        "lib/babylon/cannon.min.js",
+        "lib/babylon/oimo.min.js",
         "lib/colorpicker/jscolor.min.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

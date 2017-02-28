@@ -16,8 +16,9 @@ export class ObstructionFactory{
     private scene:BABYLON.Scene;
     private camera:BABYLON.Camera;
     private obstuctionMaterial:BABYLON.StandardMaterial;
+    obstructions:Array<BABYLON.AbstractMesh> = [];
 
-    randomRange(min, max) {
+    randomRange(min, max):number {
         if (min == max) {
             return (min);
         }
@@ -25,12 +26,11 @@ export class ObstructionFactory{
         return ((random * (max - min)) + min);
     }
 
-    newObstruction(){
-        this.scene.meshes.forEach(mesh=>{
-           if(mesh.id === "obstruction" && mesh.position.z < this.camera.position.z)
-               mesh.dispose();
-        });
-        
+    update(){
+
+    }
+
+    newObstruction(){      
         var minZ = this.camera.position.z+500;
         var maxZ = this.camera.position.z+1500;
         var minX = this.camera.position.x - 100, maxX = this.camera.position.x+100;
@@ -46,44 +46,52 @@ export class ObstructionFactory{
 
         b.scaling.x = this.randomRange(0.5, 1.5);
         b.scaling.y = this.randomRange(4, 8);
-        b.scaling.z = this.randomRange(2, 3);
+        b.scaling.z = this.randomRange(2, 6);
 
         b.position.x = randomX;
         b.position.y = b.scaling.y/2 ;
         b.position.z = randomZ;
 
         b.material = this.obstuctionMaterial;
-        b.actionManager = new BABYLON.ActionManager(this.scene);
-        var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter:this.ship.shipMesh};
-       // var sba = new BABYLON.SwitchBooleanAction(trigger, this.ship, "killed");
+    //     b.actionManager = new BABYLON.ActionManager(this.scene);
+        
+    //     var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter:this.ship.shipMesh};
+    //    // var sba = new BABYLON.SwitchBooleanAction(trigger, this.ship, "killed");
 
-        var onCollideAction = new BABYLON.ExecuteCodeAction(
-            trigger,
-            (evt) => {
-                //this.ship.killed = true;
-                //this.state = GameState.End;
-            },
-            condition);
+    //     var onCollideAction = new BABYLON.ExecuteCodeAction(
+    //         trigger,
+    //         (evt) => {
+    //             //this.ship.killed = true;
+    //             //this.state = GameState.End;
+    //         },
+    //         condition);
 
-        b.actionManager.registerAction(onCollideAction);
+    //     b.actionManager.registerAction(onCollideAction);
 
-        var condition = new BABYLON.ValueCondition(b.actionManager, this.ship, "ammo", 0, BABYLON.ValueCondition.IsGreater);
-        var onpickAction = new BABYLON.ExecuteCodeAction(
-            BABYLON.ActionManager.OnPickTrigger,
-            function(evt) {
-                if (evt.meshUnderPointer) {
-                    // Find the clicked mesh
-                    var meshClicked = evt.meshUnderPointer;
-                    // Detroy it !
-                    meshClicked.dispose();
-                    // Reduce the number of ammo by one
-                    this.ship.ammo -= 1;
-                    // Update the ammo label
-                    this.ship.sendEvent();
-                }
-            },
-            condition);
+    //     var condition = new BABYLON.ValueCondition(b.actionManager, this.ship, "ammo", 0, BABYLON.ValueCondition.IsGreater);
+    //     var onpickAction = new BABYLON.ExecuteCodeAction(
+    //         BABYLON.ActionManager.OnPickTrigger,
+    //         function(evt) {
+    //             if (evt.meshUnderPointer) {
+    //                 // Find the clicked mesh
+    //                 var meshClicked = evt.meshUnderPointer;
+    //                 // Detroy it !
+    //                 meshClicked.dispose();
+    //                 // Reduce the number of ammo by one
+    //                 this.ship.ammo -= 1;
+    //                 // Update the ammo label
+    //                 this.ship.sendEvent();
+    //             }
+    //         },
+    //         condition);
 
-        b.actionManager.registerAction(onpickAction);
+    //     b.actionManager.registerAction(onpickAction);
+        // for(let i = 0; i < this.obstructions.length; i++){
+        //     if(this.obstructions[i]._isDisposed)
+        //         this.obstructions[i] = b;
+            
+        //     return;
+        // }
+        this.obstructions.push(b);
     }
 }
