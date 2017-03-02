@@ -4,11 +4,11 @@ import { FileSystem } from '../../../../../services/FileSystem'
 import { NewPrimitive } from '../newprimitive'
 import { UUID } from '../../../../../Services/UUID'
 
-@Component(Object.assign({
+@Component({
   selector: 'load-mesh',
   templateUrl: './load-mesh.component.html',
   styleUrls: ['./load-mesh.component.css']
-}, NewPrimitive.metaData))
+})
 
 export class LoadMeshComponent extends NewPrimitive implements OnInit {
 
